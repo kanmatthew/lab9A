@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <p>Input a number between 5 and 100 inclusive</p>
+        <input type = 'text' id = 'textID'>
+        <input type = 'button' id = 'buttonID' value = 'Go!'>
+        <p id = 'checkinput'></p>
+        <script>
+            let arrayofbuttons = [];
+            let width = window.innerWidth;
+            let height = window.innerHeight;
+            function checkinput() { // Check user input
+                let input = parseInt(document.getElementById('textID').value);
+                if (input < 5 || input > 100) {
+                    document.getElementById('checkinput').innerHTML = 'Input not within range';
+                } else {
+                    buttonhandler(input);
+                    setInterval(RandomizeArrayPosition, 2000, arrayofbuttons);
+                }
+            }
+            document.getElementById('buttonID').onclick = checkinput;
+
+            function createButton (red, green, blue) { // Create buttons
+                let btn = document.createElement('button');
+                document.body.appendChild(btn);
+                btn.style.width = 10 + 'em';
+                btn.style.height = 5 + 'em';
+                btn.style.background = 'rgb(' + red + ', ' + green + ', ' + blue + ')';
+                btn.style.position = 'absolute';
+                btn.style.left = Math.floor(Math.random() * (width - (10*16))) + 'px';
+                btn.style.top = Math.floor(Math.random() * (height - (5*16))) + 'px';
+                return btn;
+                }
+            
+            function buttonhandler (input) {
+                for (i = 0; i < input; i++) {
+                    let x = Math.floor(Math.random() * 256);
+                    let y = Math.floor(Math.random() * 256);
+                    let z = Math.floor(Math.random() * 256);
+                    btn = createButton(x, y, z);
+                    arrayofbuttons.push(btn);
+            }
+            console.log(arrayofbuttons);
+        }
+            function RandomizeArrayPosition (arrayofbuttons) {
+                for (i = 0; i < arrayofbuttons.length; i++) {
+                    arrayofbuttons[i].style.left = Math.floor(Math.random() * (width - (10*16))) + 'px';
+                    arrayofbuttons[i].style.top = Math.floor(Math.random() * (height - (5*16))) + 'px';
+                }
+            }
+        </script>
+    </body>
+</html>
